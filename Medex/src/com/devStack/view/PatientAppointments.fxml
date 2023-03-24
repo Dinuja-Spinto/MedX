@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="401.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devStack.controller.PatientAppointmentsController">
+   <children>
+      <JFXButton layoutX="14.0" layoutY="10.0" style="-fx-background-color: #2d0bc2;" text="&lt;-" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Text fill="#db7807" layoutX="65.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appoinments" wrappingWidth="109.138671875">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Separator layoutX="14.0" layoutY="37.0" prefHeight="5.0" prefWidth="620.0" />
+      <JFXTextField layoutX="14.0" layoutY="52.0" promptText="From Date" />
+      <JFXTextField layoutX="175.0" layoutY="52.0" promptText="to Date" />
+      <TableView layoutX="7.0" layoutY="89.0" prefHeight="304.0" prefWidth="643.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="ID" />
+          <TableColumn prefWidth="157.0" text="Patient " />
+            <TableColumn prefWidth="91.0" text="Date" />
+            <TableColumn prefWidth="81.66668701171875" text="Time" />
+            <TableColumn prefWidth="75.66668701171875" text="Amount" />
+            <TableColumn prefWidth="81.33331298828125" text="Check State" />
+            <TableColumn prefWidth="84.33331298828125" text="Options" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

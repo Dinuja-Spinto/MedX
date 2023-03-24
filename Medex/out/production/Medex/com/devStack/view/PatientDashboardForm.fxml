@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="PatientDashContext" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devStack.controller.PatientDashboardFormController">
+    <children>
+        <Text fill="#f28c08" layoutX="24.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Dashboard">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <Label fx:id="lblDate" layoutX="201.0" layoutY="24.0" text="2020-09-11">
+            <font>
+                <Font name="Book Antiqua Bold" size="12.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblTime" layoutX="293.0" layoutY="24.0" text="00:00:00">
+            <font>
+                <Font name="Book Antiqua Bold" size="12.0" />
+            </font>
+        </Label>
+        <JFXButton buttonType="RAISED" layoutX="510.0" layoutY="20.0" style="-fx-background-color: #2011d0;" text="Logout" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <Separator layoutX="14.0" layoutY="54.0" prefHeight="0.0" prefWidth="571.0" />
+        <Separator layoutX="273.0" layoutY="21.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="6.0" />
+        <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="70.0" onAction="#navigateToNewAppoinmentPage" prefHeight="100.0" prefWidth="285.0" style="-fx-background-color: #012E6A;" text="Appoinment" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="23.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+    </children>
+</AnchorPane>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="402.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devStack.controller.PrescripitionsManagementController">
+   <children>
+      <JFXButton layoutX="14.0" layoutY="10.0" text="&lt;-" />
+      <Text layoutX="78.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precription Management" />
+      <Separator layoutX="14.0" layoutY="41.0" prefHeight="6.0" prefWidth="655.0" />
+      <JFXTextField layoutX="29.0" layoutY="56.0" promptText="From Date" />
+      <JFXTextField layoutX="203.0" layoutY="56.0" promptText="To Date" />
+      <TableView layoutX="14.0" layoutY="101.0" prefHeight="287.0" prefWidth="655.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="ID" />
+          <TableColumn prefWidth="103.66665649414062" text="Patient" />
+            <TableColumn prefWidth="125.33334350585938" text="Date" />
+            <TableColumn prefWidth="105.0" text="Appointment" />
+            <TableColumn prefWidth="173.3333740234375" text="Description" />
+            <TableColumn prefWidth="77.0" text="Options" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

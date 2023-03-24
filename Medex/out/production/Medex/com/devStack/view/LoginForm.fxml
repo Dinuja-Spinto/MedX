@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="logInPage" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devStack.controller.LoginFormController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="321.0">
+         <children>
+            <Text fill="#ff3c00" layoutX="14.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="136.1099853515625">
+               <font>
+                  <Font name="System Bold" size="34.0" />
+               </font>
+            </Text>
+            <Separator layoutX="14.0" layoutY="60.0" prefHeight="6.0" prefWidth="300.0" />
+            <JFXTextField id="txtEmail" fx:id="txtEmail" labelFloat="true" layoutX="23.0" layoutY="90.0" prefHeight="45.0" prefWidth="255.0" promptText="Enter Email">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField id="txtPassword" fx:id="txtPassword" accessibleRole="PASSWORD_FIELD" labelFloat="true" layoutX="23.0" layoutY="168.0" prefHeight="45.0" prefWidth="255.0" promptText="Enter Password">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <Hyperlink layoutX="185.0" layoutY="213.0" text="Forgot Password?" />
+            <JFXRadioButton id="rBtnDoctor" fx:id="rBtnDoctor" layoutX="34.0" layoutY="232.0" selected="true" text="Doctor">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="accountType" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton layoutX="128.0" layoutY="232.0" text="Pation" toggleGroup="$accountType">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXRadioButton>
+            <JFXButton layoutX="34.0" layoutY="268.0" onAction="#signinOnAction" prefHeight="34.0" prefWidth="240.0" ripplerFill="#0d99ff" style="-fx-background-color: #0D99FF;" text="Sign in" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="34.0" layoutY="333.0" onAction="#createAnAccountOnAction" prefHeight="34.0" prefWidth="240.0" ripplerFill="#0d99ff" style="-fx-background-color: #1A2238;" text="Create Account" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Text fill="#c95812" layoutX="139.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="400.0" fitWidth="306.0" layoutX="322.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/portrait-doctor(1).jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="666.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devStack.controller.PatientDocumentsController">
+   <children>
+      <JFXButton layoutX="31.0" layoutY="7.0" text="&lt;-" />
+      <Text layoutX="101.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Document" />
+      <Separator layoutX="14.0" layoutY="36.0" prefHeight="0.0" prefWidth="637.0" />
+      <Text layoutX="13.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NIC:" />
+      <Text layoutX="13.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name:" />
+      <Text layoutX="13.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" />
+      <TableView layoutX="9.0" layoutY="99.0" prefHeight="293.0" prefWidth="649.0">
+        <columns>
+          <TableColumn prefWidth="89.66668701171875" text="ID" />
+          <TableColumn prefWidth="236.33331298828125" text="Date" />
+            <TableColumn prefWidth="119.66665649414062" text="Doctor" />
+            <TableColumn prefWidth="132.0" text="Appointment" />
+            <TableColumn prefWidth="72.0" text="Options" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
