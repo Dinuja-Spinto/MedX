@@ -1,7 +1,9 @@
 package com.devStack.controller;
 
+import com.devStack.db.DBConnection;
 import com.devStack.dto.User;
 import com.devStack.enums.AccType;
+import com.devStack.utill.CrudUtil;
 import com.devStack.utill.IdGenarator;
 import com.devStack.utill.PasswordConfig;
 import com.jfoenix.controls.JFXPasswordField;
@@ -34,22 +36,9 @@ public class SignUpFormController {
                 fName.getText(), lName.getText(), emailTxt.getText().toLowerCase(), new PasswordConfig().encrypt(passWordTxt.getText()), rBtnDoc.isSelected() ? AccType.DOCTOR : AccType.PATIENT
         );
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/medex",
-                    "root",
-                    "Dinuj@5615011"
-            );
-            String sql = "INSERT INTO user VALUES (?,?,?,?,?,?)";
-            PreparedStatement pstm = connection.prepareStatement(sql);
-            pstm.setInt(1,new IdGenarator().genId());
-            pstm.setString(2,user.getFirstName());
-            pstm.setString(3,user.getLastName());
-            pstm.setString(4,user.getEmail());
-            pstm.setString(5,user.getPassword());
-            pstm.setString(6,user.getAccType().name());
-            int isSaved = pstm.executeUpdate();
-            if (isSaved>0){
+            Boolean isSaved = CrudUtil.execute("INSERT INTO user VALUES (?,?,?,?,?,?)",new IdGenarator().genId(),user.getFirstName(),user.getLastName(),
+                    user.getEmail(),user.getPassword(),user.getAccType().name());
+            if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Saved!").show();
                 setUi();
             }else{

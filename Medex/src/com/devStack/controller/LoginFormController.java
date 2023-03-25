@@ -1,9 +1,9 @@
 package com.devStack.controller;
 
-import com.devStack.db.Database;
-import com.devStack.dto.User;
+import com.devStack.db.DBConnection;
 import com.devStack.enums.AccType;
-import com.devStack.utill.Cookie;
+import com.devStack.utill.CrudUtil;
+import com.devStack.utill.PasswordConfig;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class LoginFormController {
 
@@ -31,25 +32,25 @@ public class LoginFormController {
         String password = txtPassword.getText();
         AccType accType = rBtnDoctor.isSelected() ? AccType.DOCTOR : AccType.PATIENT;
 
-        for (User dto : Database.userTable) {
-            if (dto.getEmail().trim().toLowerCase().equals(email)) {
-                if (dto.getPassword().equals(password)) {
-                    if (dto.getAccType().equals(accType)) {
-                        new Alert(Alert.AlertType.CONFIRMATION, "Success!").show();
-                        Cookie.selectedUser=dto;
-                        this.setUi("DoctorDashboard");
-                        return;
-                    } else {
-                        new Alert(Alert.AlertType.WARNING, String.format("We can't find your %s Account", accType.name())).show();
-                        return;
+        try{
+            ResultSet rs = CrudUtil.execute("SELECT * FROM user WHERE email=? AND account_type=?",
+                    email, accType.name());
+            if(rs.next()){
+                if(new PasswordConfig().decrypt(password,rs.getString("Password"))){
+                    if(accType.equals(AccType.DOCTOR)){
+                        setUi("DoctorDashboard");
+                    }else{
+                        setUi("PatientDashboardForm");
                     }
-                } else {
+                }else{
                     new Alert(Alert.AlertType.WARNING, "Your Password is incorrect!").show();
-                    return;
                 }
+            }else{
+                new Alert(Alert.AlertType.WARNING, String.format("We can't find an (%s) Email", email)).show();
             }
+        }catch (ClassNotFoundException | SQLException e){
+            e.printStackTrace();
         }
-        new Alert(Alert.AlertType.WARNING, String.format("We can't find an (%s) Email", email)).show();
     }
 
     public void createAnAccountOnAction(ActionEvent actionEvent) throws IOException {
