@@ -1,7 +1,9 @@
 package com.devStack.controller;
 
 import com.devStack.db.DBConnection;
+import com.devStack.dto.User;
 import com.devStack.enums.AccType;
+import com.devStack.utill.Cookie;
 import com.devStack.utill.CrudUtil;
 import com.devStack.utill.PasswordConfig;
 import com.jfoenix.controls.JFXRadioButton;
@@ -36,11 +38,28 @@ public class LoginFormController {
             ResultSet rs = CrudUtil.execute("SELECT * FROM user WHERE email=? AND account_type=?",
                     email, accType.name());
             if(rs.next()){
+                Cookie.selectedUser = new User(rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        "",
+                        AccType.valueOf(rs.getString("account_type")));
                 if(new PasswordConfig().decrypt(password,rs.getString("Password"))){
-                    if(accType.equals(AccType.DOCTOR)){
-                        setUi("DoctorDashboard");
+                    if(accType.equals(AccType.PATIENT)){
+                        ResultSet selectedPatient = CrudUtil.execute("SELECT patient_id from patient WHERE email=?",email);
+                        if(selectedPatient.next()){
+                            setUi("PatientDashboardForm");
+                        }else{
+                            //setUi("PatientRegForm");
+                        }
+
                     }else{
-                        setUi("PatientDashboardForm");
+                        ResultSet selectedDoctor = CrudUtil.execute("SELECT doctor_id from doctor WHERE email=?",email);
+
+                        if(selectedDoctor.next()){
+                            setUi("DoctorDashboard");
+                        }else{
+                            setUi("DoctorRegistrationForm");
+                        }
                     }
                 }else{
                     new Alert(Alert.AlertType.WARNING, "Your Password is incorrect!").show();
