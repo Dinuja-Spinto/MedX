@@ -49,7 +49,7 @@ public class LoginFormController {
                         if(selectedPatient.next()){
                             setUi("PatientDashboardForm");
                         }else{
-                            //setUi("PatientRegForm");
+                            setUi("PatientRegistrationForm");
                         }
 
                     }else{
