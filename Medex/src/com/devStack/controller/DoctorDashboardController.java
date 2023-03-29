@@ -75,4 +75,8 @@ public class DoctorDashboardController {
     public void navigateToPatientManagementPage(ActionEvent actionEvent) throws IOException {
         setUi("PatientManagement");
     }
+
+    public void navigateToAppointmentsManagementPage(ActionEvent actionEvent) throws IOException {
+        setUi("PatientAppointments");
+    }
 }

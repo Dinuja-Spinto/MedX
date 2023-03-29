@@ -1,16 +1,23 @@
 package com.devStack.controller;
 
-import com.devStack.db.Database;
-import com.devStack.dto.PatientDto;
+import com.devStack.enums.GenderType;
+import com.devStack.utill.CrudUtil;
 import com.devStack.view.tm.PatientTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 public class PatientManagementController {
@@ -18,19 +25,19 @@ public class PatientManagementController {
     public TableColumn colGender;
     public TableColumn colAge;
     public TableColumn colEmail;
-    public TableView<PatientTm> tblPatient;
     public TextField txtSearch;
-    public TableView tblPatients;
+    public TableView<PatientTm> tblPatients;
     public TableColumn colFirstName;
     public TableColumn colLastName;
     public TableColumn colDob;
     public TableColumn colAddress;
+    public AnchorPane patientContext;
 
     public void initialize(){
-        //loadAllData("");
+        loadAllData("");
 
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-           // loadAllData(newValue);
+           loadAllData(newValue);
         });
 
         colNic.setCellValueFactory(new PropertyValueFactory<>("nic"));
@@ -44,35 +51,40 @@ public class PatientManagementController {
     }
 
     public void loadAllData(String s) {
-        s = s.toLowerCase(); // immutable
+        String searchText="%"+s+"%";
         ObservableList<PatientTm> tmList = FXCollections.observableArrayList();
-        //==> filter
-        for (PatientDto dto : Database.patientTable
-        ) {
-            if (
-                    dto.getfName().contains(s) ||
-                            dto.getlName().contains(s) ||
-                            dto.getEmail().contains(s)
-            ) {
-                tmList.add(
-                        new PatientTm(
-                                dto.getNic(),
-                                dto.getfName(),
-                                dto.getlName(),
-                                new SimpleDateFormat("yyyy-MM-dd")
-                                        .format(dto.getDbo()),
-                                dto.getGenderType(),
-                                dto.getAddress(),
-                                10,
-                                dto.getEmail()
-                        )
-                );
+        try {
+            ResultSet set = CrudUtil.execute("SELECT * FROM patient WHERE email LIKE ? OR first_name LIKE ? OR last_name LIKE ?",
+                    searchText,searchText,searchText);
+            while (set.next()){
+                tmList.add(new PatientTm(
+                        set.getString(6),
+                        set.getString(2),
+                        set.getString(3),
+                        new SimpleDateFormat("yyyy-MM-dd")
+                                .format(set.getDate(8)),
+                        set.getString(9)=="MALE"? GenderType.FE_MALE:GenderType.MALE,
+                        set.getString(7),
+                        0,
+                        set.getString(4)
+                ));
             }
-            tblPatient.setItems(tmList);
+            tblPatients.setItems(tmList);
+
+        }catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
         }
     }
 
-    public void backToHomeOnAction(ActionEvent actionEvent) {
+    public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("DoctorDashboard");
+    }
+
+    private void setUi(String location) throws IOException {
+        Stage stage = (Stage) patientContext.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.
+                load(getClass().getResource("../view/"+location+".fxml"))));
+        stage.centerOnScreen();
     }
 }
 
